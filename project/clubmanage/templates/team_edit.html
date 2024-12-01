@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팀 수정</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center; /* 콘텐츠가 화면 왼쪽부터 시작하도록 */
+            align-items: center;     /* 콘텐츠가 화면 위쪽부터 시작하도록 */
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+            padding-top: 60px;  /* 폼 상단이 고정되었을 때, 화면 내용이 겹치지 않도록 위 여백 추가 */
+        }
+        
+        form {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            position: relative;  /* 이 위치를 상대적으로 조정할 수 있도록 설정 */
+        }
+        
+        h2 {
+            position: sticky; /* 제목을 고정 */
+            top: 0;
+            background-color: #fff; /* 배경색을 설정하여 겹칠 때 구분이 잘 되도록 */
+            padding: 10px;
+            z-index: 10; /* 다른 요소들보다 위에 보이도록 설정 */
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form input, form button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form input[type="checkbox"] {
+            width: auto;
+        }
+
+        .checkbox-group, .session-input {
+            margin-bottom: 15px;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .back-button a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'team_edit' %}">
+        {% csrf_token %}
+        <h2>팀 수정</h2>
+
+        <label for="type">타입:</label>
+        <select id="type" name="type" required>
+            <option value="add">추가</option>
+            <option value="update">변경</option>
+            <option value="delete">삭제</option>
+        </select>
+
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="description">설명:</label>
+        <input type="text" id="description" name="description">
+
+        <label for="song1">노래1:</label>
+        <input type="text" id="song1" name="song1">
+
+        <label for="song2">노래2:</label>
+        <input type="text" id="song2" name="song2">
+
+        <label for="song3">노래3:</label>
+        <input type="text" id="song3" name="song3">
+        
+        <label for="song4">노래4:</label>
+        <input type="text" id="song4" name="song4">
+
+        <label for="song5">노래5:</label>
+        <input type="text" id="song5" name="song5">
+
+        <label for="time">연습 시간대:</label>
+        <input type="text" id="time" name="time">
+
+        <label for="vocal">보컬:</label>
+        <input type="text" id="vocal" name="vocal">
+
+        <label for="second_vocal">세컨보컬:</label>
+        <input type="text" id="second_vocal" name="second_vocal">
+
+        <label for="guitar">기타:</label>
+        <input type="text" id="guitar" name="guitar">
+
+        <label for="second_guitar">세컨기타:</label>
+        <input type="text" id="second_guitar" name="second_guitar">
+
+        <label for="third_guitar">서드기타:</label>
+        <input type="text" id="third_guitar" name="third_guitar">
+
+        <label for="bass">베이스:</label>
+        <input type="text" id="bass" name="bass">
+
+        <label for="drum">드럼:</label>
+        <input type="text" id="drum" name="drum">
+
+        <label for="keyboard">키보드:</label>
+        <input type="text" id="keyboard" name="keyboard">
+
+        <label for="second_keyboard">세컨키보드:</label>
+        <input type="text" id="second_keyboard" name="second_keyboard">
+
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">제출</button>
+    </form>
+
+    <div class="back-button">
+        <a href="{% url 'team' %}">← 돌아가기</a>
+    </div>
+</body>
+</html>

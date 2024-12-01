@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 관리 시스템</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        .content-container {
+            width: 95%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 100px; /* 고정된 헤더 높이 만큼 여백 추가 */
+        }
+
+        .header-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f9f9f9;
+            border-bottom: 1px solid #ddd;
+            z-index: 1000; /* 다른 요소 위로 올라오도록 설정 */
+            padding: 10px 20px; /* 좌우 패딩 추가로 글씨 잘림 방지 */
+            display: flex;
+            justify-content: center; /* 가운데 정렬 */
+            align-items: center;
+        }
+
+        .header-title {
+            display: flex;
+            gap: 20px; /* 제목 간 간격 */
+        }
+
+        .header-title h1 {
+            margin: 0;
+            cursor: pointer;
+        }
+
+        .header-container button {
+            padding: 10px 20px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .header-container button:hover {
+            background-color: #0056b3;
+        }
+
+        .search-container {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .search-container form {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-container input,
+        .search-container select,
+        .search-container button {
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            background-color: #FFA500; /* 검색 버튼: 주황색 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .search-container button:hover {
+            background-color: #FF8C00;
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        tr:hover {
+            background-color: #f1f1f1;
+        }
+
+        .add-button {
+            padding: 10px 20px;
+            background-color: #4CAF50; /* 추가 버튼: 녹색 */
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+
+        .add-button:hover {
+            background-color: #45a049;
+        }
+
+        .edit-button {
+            padding: 6px 12px;
+            background-color: #FFD700; /* 수정 버튼: 노란색 */
+            color: black;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .edit-button:hover {
+            background-color: #FFC107;
+        }
+
+        .delete-button {
+            padding: 6px 12px;
+            background-color: #f44336; /* 제거 버튼: 빨간색 */
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .delete-button:hover {
+            background-color: #d32f2f;
+        }
+    </style>
+</head>
+<body>
+    <div class="header-container">
+        <div class="header-title">
+            <a href="{% url 'user' %}">
+                <h1>회원 관리 시스템</h1>
+            </a>
+            <a href="{% url 'team' %}">
+                <h1>팀 관리 시스템</h1>
+            </a>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <div class="search-container">
+            <a href="{% url 'user_add' %}">
+                <button class="add-button">수정</button>
+            </a>
+
+            <form method="get" action="{% url 'user' %}">
+                <input type="text" name="search_query" placeholder="검색어를 입력하세요..." value="{{ search_query }}">
+                <select name="search_type">
+                    <option value="name" {% if search_type == 'name' %}selected{% endif %}>이름</option>
+                    <option value="age" {% if search_type == 'age' %}selected{% endif %}>나이</option>
+                    <option value="major" {% if search_type == 'major' %}selected{% endif %}>전공</option>
+                    <option value="genre" {% if search_type == 'genre' %}selected{% endif %}>취향 장르</option>
+                    <option value="time" {% if search_type == 'time' %}selected{% endif %}>가능 시간대</option>
+                    <option value="session" {% if search_type == 'session' %}selected{% endif %}>세션</option>
+                </select>
+                <button type="submit">검색</button>
+            </form>
+        </div>
+
+        <table>
+            <tr>
+                <th>이름</th>
+                <th>나이</th>
+                <th>전공</th>
+                <th>연락처</th>
+                <th>취향 장르</th>
+                <th>가능 시간대</th>
+                <th>세션</th>
+            </tr>
+            {% for row in joined_data %}
+            <tr>
+                <td>{{ row.0 }}</td>
+                <td>{{ row.1 }}</td>
+                <td>{{ row.2 }}</td>
+                <td>{{ row.3 }}</td>
+                <td>{{ row.4 }}</td>
+                <td>{{ row.5 }}</td>
+                <td>{{ row.6 }}</td>
+            {% endfor %}
+        </table>
+    </div>
+</body>
+</html>

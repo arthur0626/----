@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원 수정</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
+        form {
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form input, form button {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form input[type="checkbox"] {
+            width: auto;
+        }
+
+        .checkbox-group, .session-input {
+            margin-bottom: 15px;
+        }
+
+        form button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #45a049;
+        }
+
+        .back-button {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .back-button a {
+            text-decoration: none;
+            color: #007BFF;
+        }
+
+        .back-button a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <form method="post" action="{% url 'user_add' %}">
+        {% csrf_token %}
+        <h2>회원 수정</h2>
+
+        <label for="type">타입:</label>
+        <select id="type" name="type" required>
+            <option value="add">추가</option>
+            <option value="update">변경</option>
+            <option value="delete">삭제</option>
+        </select>
+
+        <label for="student_id">학번:</label>
+        <input type="number" id="student_id" name="student_id" required>
+
+        <label for="name">이름:</label>
+        <input type="text" id="name" name="name">
+
+        <label for="age">나이:</label>
+        <input type="number" id="age" name="age">
+
+        <label for="major">전공:</label>
+        <input type="text" id="major" name="major">
+
+        <label for="contact">연락처:</label>
+        <input type="text" id="contact" name="contact">
+
+        <label>좋아하는 장르:</label>
+        <div class="checkbox-group">
+            <input type="checkbox" name="genres" value="k_pop"> 케이팝
+            <input type="checkbox" name="genres" value="j_pop"> 제이팝
+            <input type="checkbox" name="genres" value="pop"> 팝송
+            <input type="checkbox" name="genres" value="hard"> 하드록
+            <input type="checkbox" name="genres" value="indie"> 인디
+            <input type="checkbox" name="genres" value="funk"> 펑크
+            <input type="checkbox" name="genres" value="r_b"> 알앤비
+            <input type="checkbox" name="genres" value="ballad"> 발라드
+
+
+        </div>
+
+        <label>가능 요일:</label>
+        <div class="checkbox-group">
+            <input type="checkbox" name="available_days" value="mon"> 월
+            <input type="checkbox" name="available_days" value="tue"> 화
+            <input type="checkbox" name="available_days" value="wed"> 수
+            <input type="checkbox" name="available_days" value="thu"> 목
+            <input type="checkbox" name="available_days" value="fri"> 금
+            <input type="checkbox" name="available_days" value="sat"> 토
+            <input type="checkbox" name="available_days" value="sun"> 일
+        </div>
+
+        <label>세션:</label>
+        <div class="checkbox-group">
+            <input type="checkbox" name="sessions" value="vocal"> 보컬
+            <input type="checkbox" name="sessions" value="guitar"> 기타
+            <input type="checkbox" name="sessions" value="bass"> 베이스
+            <input type="checkbox" name="sessions" value="drum"> 드럼
+            <input type="checkbox" name="sessions" value="keyboard"> 건반
+        </div>
+
+        <label for="password">비밀번호:</label>
+        <input type="password" id="password" name="password" required>
+
+        <button type="submit">제출</button>
+    </form>
+
+    <div class="back-button">
+        <a href="{% url 'user' %}">← 돌아가기</a>
+    </div>
+</body>
+</html>
